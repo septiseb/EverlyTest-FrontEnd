@@ -19,6 +19,12 @@ export default function NavBarHome() {
               <div className="hidden sm:block sm:ml-6">
                 <div className="flex space-x-4">
                   <Link
+                    to="/user-profile"
+                    className="text-white-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                  >
+                    Dashboard
+                  </Link>
+                  <Link
                     to="/"
                     className="text-white-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                   >

@@ -6,14 +6,16 @@ import SignUp from "./components/Landing/SignUp";
 import AllTest from "./components/Landing/AllTest";
 import TestLog from "./components/Landing/TestLog";
 import TestDetail from "./components/Landing/TestDetail";
-
-import { useEffect, useState } from "react";
+import HomeDash from "./components/Dashboard/HomeDash";
+import PrivateRoute from "./components/Dashboard/PrivateRoute";
 import TokenState from "./context/auth/AuthState";
+import CrearPruebas from "./components/Dashboard/CrearPruebas";
+import ChooseTest from "./components/Dashboard/ChooseTest";
+import DetailTesters from "./components/Dashboard/DetailTesters";
+import EditTest from "./components/Dashboard/EditTest";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(null);
-
-  console.log(loggedIn);
+  //const [loggedIn, setLoggedIn] = useState(null);
 
   return (
     <>
@@ -21,19 +23,33 @@ function App() {
         <Router>
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route
-              exact
-              path="/login"
-              render={() => <LogIn getUser={setLoggedIn} />}
-            />
-            <Route
-              exact
-              path="/signup"
-              render={() => <SignUp getUser={setLoggedIn} />}
-            />
+            <Route exact path="/login" component={LogIn} />
+            <Route exact path="/signup" component={SignUp} />
             <Route exact path="/tests" component={AllTest} />
             <Route exact path="/tests/:idTest" component={TestDetail} />
             <Route exact path="/login-tester" component={TestLog} />
+            {/*       <PrivateRoute exact path="/user-profile" component={HomeDash} /> */}
+           <Route exact path="/user-profile" component={HomeDash} />
+            <Route
+              exact
+              path="/user-profile/:idUser/create-test"
+              component={CrearPruebas}
+            />
+            <Route
+              exact
+              path="/user-profile/:idUser/create-test/:idGroupTest"
+              component={ChooseTest}
+            />
+            <Route
+              exact
+              path="/user-profile/details/:idGroupTest"
+              component={DetailTesters}
+            />
+            <Route
+              exact
+              path="/user-profile/edit-test/:idGroupTest"
+              component={EditTest}
+            />
           </Switch>
         </Router>
       </TokenState>

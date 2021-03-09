@@ -1,16 +1,16 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import NavBarHome from "./NavBarHome";
+import INFO_USER from "../services/user";
 
 export default function AllTest() {
   const [tests, setTests] = useState([]);
 
   useEffect(() => {
-    const getTests =async ()=>{
-        const testAxios = await axios.get("http://localhost:3001/tests");
-        setTests(testAxios.data);
-    }
+    const getTests = async () => {
+      const testAxios = await INFO_USER.AllTest();
+      setTests(testAxios.data);
+    };
     getTests();
   }, []);
 

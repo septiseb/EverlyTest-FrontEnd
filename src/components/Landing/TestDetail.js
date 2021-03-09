@@ -5,8 +5,7 @@ import NavBarHome from "./NavBarHome";
 
 export default function TestDetail() {
   const {idTest} = useParams();
-  const [test, setTest] = useState({ position: [], questions: [] });
-  console.log(idTest);
+  const [test, setTest] = useState({ position: [], questions: [] });  
 
   useEffect(() => {
     const getTest = async () => {

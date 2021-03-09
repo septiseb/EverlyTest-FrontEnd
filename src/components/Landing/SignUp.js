@@ -1,12 +1,37 @@
 import React, { useState } from "react";
 import NavBarHome from "./NavBarHome";
-import AUTH_SERVICE from "../auth/auth";
+import AUTH_SERVICE from "../services/auth";
+
+const positionArray = [
+  "Analista de Reclutamiento",
+  "Gerente de RH",
+  "Reclutador Jr",
+  "Recultador Sr",
+  "Otros",
+];
+const sectorArray = [
+  "Educación",
+  "Agricultura y Ganadería",
+  "Legal",
+  "Alimentos",
+  "Comercio",
+  "Construcción",
+  "Energía y Agua",
+  "Seguros",
+  "Hosteleria y Turismo",
+  "Tecnología",
+  "Telecomunicaciones",
+  "Transporte",
+  "Automotriz",
+  "Otros",
+];
 
 export default function SignUp({ getUser }) {
   const [state, setState] = useState({
     position: "Analista de Reclutamiento",
-    sector: "Farma",
+    sector: "Educación",
   });
+  const [error, setError] = useState("");
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -15,141 +40,175 @@ export default function SignUp({ getUser }) {
       getUser(signUpAx);
       setState({});
     } catch (e) {
-      console.log(e.response.data);
+      setError(e.response.data);
     }
   };
 
+  console.log(state);
+
   const handleChange = (event) => {
-    setState({...state, [event.target.name]: event.target.value });
+    setState({ ...state, [event.target.name]: event.target.value });
   };
 
   return (
     <>
       <NavBarHome />
-      <div className="container-login">
-        <div className="row m-0 h-100">
-          <div className="col p-0 text-center d-flex justify-content-center align-items-center display-none">
-            <img
-              src="../../images/signup-background.png"
-              className="w-100 image-login"
-              alt="signup"
-            />
+      <div className="mx-auto max-w-6xl p-12">
+        <div className="flex flex-col md:flex-row justify-center">
+          <div className="md:w-1/2 max-w-md flex flex-col justify-center">
+            <div className="md:text-4xl text-xl font-black uppercase">
+              Awesome tool for your future team
+            </div>
+            <div className="text-xl mt-4">
+              Develop your workforce and make it a selling machine
+            </div>
           </div>
-          <div className="col p-0 bg-custom d-flex justify-content-center align-items-center flex-column w-100">
-            <h1 style={{ color: "white", marginTop: "50px" }}>Registrarse</h1>
-            <form
-              className="w-75"
-              action="/signup"
-              method="POST"
-              onSubmit={handleFormSubmit}
-            >
-              <div className="mb-3">
-                <label htmlFor="exampleFormControlInput1" className="form-label">
-                  Nombre
-                </label>
-                <input
-                  onChange={(e) => handleChange(e)}
-                  value={state.name}
-                  type="text"
-                  className="form-control"
-                  id="exampleFormControlInput12"
-                  name="name"
-                  placeholder="Nombre"
-                />
+          <div className="md:w-1/2 flex justify-start mt-5 md:justify-end w-full md:w-1/2 ">
+            <div className="shadow-md flex-auto max-w-sm p-10 pb-20">
+              <div className="w-full">
+                <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                  <span className="text-red-400 mr-1">*</span> Nombre
+                </div>
+                <div className="my-2 bg-white p-1 flex border border-gray-200 rounded">
+                  <input
+                    onChange={(e) => handleChange(e)}
+                    value={state.name}
+                    type="text"
+                    id="exampleFormControlInput12"
+                    name="name"
+                    placeholder="Nombre"
+                    className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                  />{" "}
+                </div>
               </div>
-              <div className="mb-3">
-                <label htmlFor="exampleFormControlInput3" className="form-label">
-                  Apellido
-                </label>
-                <input
-                  onChange={(e) => handleChange(e)}
-                  value={state.lastName}
-                  type="text"
-                  className="form-control"
-                  id="exampleFormControlInput4"
-                  name="lastName"
-                  placeholder="Apellido"
-                />
+              <div className="w-full">
+                <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                  <span className="text-red-400 mr-1">*</span> Apellido
+                </div>
+                <div className="my-2 bg-white p-1 flex border border-gray-200 rounded">
+                  {" "}
+                  <input
+                    onChange={(e) => handleChange(e)}
+                    value={state.lastName}
+                    type="text"
+                    id="exampleFormControlInput4"
+                    name="lastName"
+                    placeholder="Apellido"
+                    className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                  />{" "}
+                </div>
               </div>
-              <div className="mb-3">
-                <label htmlFor="exampleFormControlInput5" className="form-label">
-                  Correo
-                </label>
-                <input
-                  onChange={(e) => handleChange(e)}
-                  type="email"
-                  value={state.email}
-                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}"
-                  className="form-control"
-                  id="exampleFormControlInput6"
-                  name="email"
-                  placeholder="Correo"
-                />
+              <div className="w-full">
+                <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                  <span className="text-red-400 mr-1">*</span> Email
+                </div>
+                <div className="my-2 bg-white p-1 flex border border-gray-200 rounded">
+                  {" "}
+                  <input
+                    onChange={(e) => handleChange(e)}
+                    type="email"
+                    value={state.email}
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}"
+                    id="exampleFormControlInput6"
+                    name="email"
+                    placeholder="Correo"
+                    className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                  />{" "}
+                </div>
               </div>
-              <div className="mb-3">
-                <label htmlFor="exampleFormControlInput7" className="form-label">
-                  Empresa
-                </label>
-                <input
-                  onChange={(e) => handleChange(e)}
-                  value={state.company}
-                  type="text"
-                  className="form-control"
-                  id="exampleFormControlInput8"
-                  name="company"
-                  placeholder="Nombre de la Empresa"
-                />
+              <div className="w-full">
+                <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                  <span className="text-red-400 mr-1">*</span> Empresa
+                </div>
+                <div className="my-2 bg-white p-1 flex border border-gray-200 rounded">
+                  {" "}
+                  <input
+                    onChange={(e) => handleChange(e)}
+                    value={state.company}
+                    type="text"
+                    id="exampleFormControlInput8"
+                    name="company"
+                    placeholder="Nombre de la Empresa"
+                    className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                  />{" "}
+                </div>
               </div>
-              <div className="mb-3">
-                <label htmlFor="exampleFormControlInput9" className="form-label">
-                  Sector
-                </label>
-                <select
-                  name="sector"
-                  className="form-control"
-                  onChange={(e) => handleChange(e)}
+              <div className="w-full">
+                <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                  <span className="text-red-400 mr-1">*</span> Sector
+                </div>
+                <div className="my-2 bg-white p-1 flex border border-gray-200 rounded">
+                  {" "}
+                  <select
+                    name="sector"
+                    className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                    onChange={(e) => handleChange(e)}
+                  >
+                    {sectorArray.map((sec) => (
+                      <option>{sec}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              <div className="w-full">
+                <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                  <span className="text-red-400 mr-1">*</span> Puesto
+                </div>
+                <div className="my-2 bg-white p-1 flex border border-gray-200 rounded">
+                  {" "}
+                  <select
+                    name="sector"
+                    className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                    onChange={(e) => handleChange(e)}
+                  >
+                    {positionArray.map((pos) => (
+                      <option>{pos}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              <div className="w-full">
+                <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                  <span className="text-red-400 mr-1">*</span> Contraseña
+                </div>
+                <div className="my-2 bg-white p-1 flex border border-gray-200 rounded">
+                  {" "}
+                  <input
+                    value={state.password}
+                    onChange={(e) => handleChange(e)}
+                    type="password"
+                    id="exampleFormControlInput2"
+                    name="password"
+                    placeholder="*********"
+                    className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                  />{" "}
+                </div>
+              </div>
+              <div>
+                <p>
+                  {" "}
+                  {error ? (
+                    <p className="text-red-600">{error.errorMessage}</p>
+                  ) : (
+                    ""
+                  )}
+                </p>
+              </div>
+              <div className="mt-6 relative">
+                <button
+                  onClick={handleFormSubmit}
+                  type="submit"
+                  className="shadow-md font-medium py-2 px-4 text-blue-600 hover:text-blue-300
+                  cursor-pointer bg-teal-600 rounded text-lg tr-mt  absolute text-center w-full"
                 >
-                  <option>Educación</option>
-                  <option>Agricultura y Ganadería</option>
-                </select>
+                  Crear Cuenta
+                </button>
               </div>
-              <div className="mb-3">
-                <label htmlFor="exampleFormControlInput10" className="form-label">
-                  Puesto
-                </label>
-                <select
-                  name="position"
-                  className="form-control"
-                  onChange={(e) => handleChange(e)}
-                >
-                  <option>Analista de Reclutamiento</option>
-                  <option>Gerente de RH</option>
-                </select>
-              </div>
-              <div className="mb-3">
-                <label htmlFor="exampleFormControlInput2" className="form-label">
-                  Contraseña
-                </label>
-                <input
-                  value={state.password}
-                  onChange={(e) => handleChange(e)}
-                  type="password"
-                  className="form-control"
-                  id="exampleFormControlInput2"
-                  name="password"
-                  placeholder="*********"
-                />
-              </div>
-              <button
-                type="submit"
-                className="btn btn-custom btn-lg btn-block mt-3 btn-crear-cuenta"
-              >
-                Crear Cuenta
-              </button>
-            </form>
+            </div>
           </div>
         </div>
       </div>
+      ;
     </>
   );
 }

@@ -1,13 +1,14 @@
 import React, { useState, useContext } from "react";
 import NavBarHome from "./NavBarHome";
-import AUTH_SERVICE from "../auth/auth";
-import AuthContext from "../../context/auth/AuthContext"
+import AuthContext from "../../context/auth/AuthContext";
+import { Redirect } from "react-router";
 
 export default function LogIn({ getUser }) {
   const ctx = useContext(AuthContext);
   const [state, setState] = useState({});
+  console.log(ctx.token);
 
-  const handleFormSubmit = async (event) => {
+  /*   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
       const signUpAx = await AUTH_SERVICE.login(state);
@@ -16,71 +17,109 @@ export default function LogIn({ getUser }) {
     } catch (e) {
       console.log(e.response.data);
     }
-  };
+  }; */
 
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.value });
   };
 
+  if (ctx.token) {
+    return <Redirect to="/user-profile" />;
+  }
+
   return (
     <>
       <NavBarHome />
-
-      <div className="container-login">
-        <div className="row m-0 h-100">
-          <div className="col p-0 text-center d-flex justify-content-center align-items-center display-none">
-            <img
-              src="../../images/login-backgroun.png"
-              className="w-100 image-login"
-              alt="login"
-            />
-          </div>
-          <div className="col p-0 bg-custom d-flex justify-content-center align-items-center flex-column w-100">
-            <h1 style={{ color: "white", marginTop: "50px" }}>
-              Iniciar Sesion
-            </h1>
-            <form
-              className="w-75"
-              action="/login"
-              method="POST"
-              onSubmit={handleFormSubmit}
-            >
-              <div className="mb-3">
-                <label for="exampleFormControlInput1" className="form-label">
-                  Correo
-                </label>
-                <input
-                  onChange={(e) => handleChange(e)}
-                  type="text"
-                  className="form-control"
-                  id="exampleFormControlInput1"
-                  name="email"
-                  placeholder="Correo"
-                />
+      <body class="font-mono bg-gray-400">
+        <div class="container mx-auto">
+          <div class="flex justify-center px-6 my-12">
+            <div class="w-full xl:w-3/4 lg:w-11/12 flex">
+              <div
+                class="w-full h-auto bg-gray-400 hidden lg:block lg:w-1/2 bg-cover rounded-l-lg"
+                style={{
+                  backgroundImage:
+                    "url('https://source.unsplash.com/K4mSJ7kc0As/600x800')",
+                }}
+              ></div>
+              <div class="w-full lg:w-1/2 bg-white p-5 rounded-lg lg:rounded-l-none">
+                <h3 class="pt-4 text-2xl text-center">Bienvenido</h3>
+                <form class="px-8 pt-6 pb-8 mb-4 bg-white rounded">
+                  <div class="mb-4">
+                    <label
+                      class="block mb-2 text-sm font-bold text-gray-700"
+                      for="username"
+                    >
+                      Correo
+                    </label>
+                    <input
+                      class="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                      onChange={(e) => handleChange(e)}
+                      type="text"
+                      id="exampleFormControlInput1"
+                      name="email"
+                      placeholder="Correo"
+                    />
+                  </div>
+                  <div class="mb-4">
+                    <label
+                      class="block mb-2 text-sm font-bold text-gray-700"
+                      for="password"
+                    >
+                      Contraseña
+                    </label>
+                    <input
+                      class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border border-red-500 rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                      onChange={(e) => handleChange(e)}
+                      type="password"
+                      id="exampleFormControlInput2"
+                      name="password"
+                      placeholder="*********"
+                    />
+                  </div>
+                  <div class="mb-4">
+                    <input
+                      class="mr-2 leading-tight"
+                      type="checkbox"
+                      id="checkbox_id"
+                    />
+                    <label class="text-sm" for="checkbox_id">
+                      Remember Me
+                    </label>
+                  </div>
+                  <div class="mb-6 text-center">
+                    <p className="text-red-800">{ctx.error}</p>
+                    <button
+                      class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
+                      type="button"
+                      onClick={() => ctx.obtenerToken(state)}
+                    >
+                      Iniciar Sesion
+                    </button>
+                  </div>
+                  <hr class="mb-6 border-t" />
+                  <div class="text-center">
+                    <a
+                      class="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
+                      href="./register.html"
+                    >
+                      Create an Account!
+                    </a>
+                  </div>
+                  <div class="text-center">
+                    <a
+                      class="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
+                      href="./forgot-password.html"
+                    >
+                      Forgot Password?
+                    </a>
+                  </div>
+                </form>
               </div>
-              <div className="mb-3">
-                <label for="exampleFormControlInput2" className="form-label">
-                  Contraseña
-                </label>
-                <input
-                  onChange={(e) => handleChange(e)}
-                  type="password"
-                  className="form-control"
-                  id="exampleFormControlInput2"
-                  name="password"
-                  placeholder="*********"
-                />
-              </div>
-              <button
-                type="submit"
-                className="btn btn-custom btn-lg btn-block mt-3"
-              >
-                Iniciar Sesión
-              </button>
-            </form>
+            </div>
           </div>
         </div>
-      </div>
+      </body>
+      ;
     </>
   );
 }
