@@ -1,125 +1,149 @@
-import React, { useState, useContext } from "react";
-import NavBarHome from "./NavBarHome";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
+
+import AlertaContext from "../../context/alerts/AlertaContex";
 import AuthContext from "../../context/auth/AuthContext";
-import { Redirect } from "react-router";
+import NavBarHome from "./NavBarHome";
 
-export default function LogIn({ getUser }) {
-  const ctx = useContext(AuthContext);
-  const [state, setState] = useState({});
-  console.log(ctx.token);
+export default function Login(props) {
+  // Extraer los valores del context
+  const alertaContext = useContext(AlertaContext);
+  const { alerta, mostrarAlerta } = alertaContext;
 
-  /*   const handleFormSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      const signUpAx = await AUTH_SERVICE.login(state);
-      getUser(signUpAx.data);
-      setState({});
-    } catch (e) {
-      console.log(e.response.data);
+  const authContext = useContext(AuthContext);
+  const { mensaje, autenticado, iniciarSesion } = authContext;
+
+  useEffect(() => {
+    if (autenticado) {
+      props.history.push("/user-profile");
     }
-  }; */
 
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.value });
+    if (mensaje) {
+      mostrarAlerta(mensaje.msg, mensaje.categoria);
+    }
+  }, [mensaje, autenticado, props.history]);
+
+  // State para iniciar sesión
+  const [usuario, guardarUsuario] = useState({
+    email: "",
+    password: "",
+  });
+
+  // Extraer de usuario
+  const { email, password } = usuario;
+
+  const onChange = (e) => {
+    guardarUsuario({
+      ...usuario,
+      [e.target.name]: e.target.value,
+    });
+  };
+  // Cuando el usuario quiera iniciar sesión
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    //validar que no haya campos vacios
+    if (email.trim() === "" || password.trim() === "") {
+      return mostrarAlerta("Todos los campos son obligatorios", "alerta-error");
+    }
+
+    // pasarlo al action
+
+    iniciarSesion({ email, password });
   };
 
-  if (ctx.token) {
-    return <Redirect to="/user-profile" />;
-  }
-
   return (
-    <>
+    <div className="form-usuario">
       <NavBarHome />
-      <body class="font-mono bg-gray-400">
-        <div class="container mx-auto">
-          <div class="flex justify-center px-6 my-12">
-            <div class="w-full xl:w-3/4 lg:w-11/12 flex">
-              <div
-                class="w-full h-auto bg-gray-400 hidden lg:block lg:w-1/2 bg-cover rounded-l-lg"
-                style={{
-                  backgroundImage:
-                    "url('https://source.unsplash.com/K4mSJ7kc0As/600x800')",
-                }}
-              ></div>
-              <div class="w-full lg:w-1/2 bg-white p-5 rounded-lg lg:rounded-l-none">
-                <h3 class="pt-4 text-2xl text-center">Bienvenido</h3>
-                <form class="px-8 pt-6 pb-8 mb-4 bg-white rounded">
-                  <div class="mb-4">
+      {alerta ? (
+        <div className={`alerta ${alerta.categoria}`}>{alerta.msg}</div>
+      ) : null}
+
+      <div className="flex items-center my-10 bg-white dark:bg-gray-900">
+        <div className="container mx-auto">
+          <div className="max-w-md mx-auto my-10">
+            <div className="text-center">
+              <h1 className="my-3 text-3xl font-semibold text-gray-700 dark:text-gray-200">
+                Iniciar Sesion
+              </h1>
+
+              <p className="text-gray-500 dark:text-gray-400">
+                Bienvenido de Regreso!
+              </p>
+            </div>
+
+            <div className="m-7">
+              <form onSubmit={onSubmit}>
+                <div className="mb-6">
+                  <label
+                    htmlFor="email"
+                    className="block mb-2 text-sm text-gray-600 dark:text-gray-400"
+                  >
+                    Correo
+                  </label>
+
+                  <input
+                    onChange={onChange}
+                    value={email}
+                    type="email"
+                    name="email"
+                    placeholder="correo"
+                    className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
+                  />
+                </div>
+
+                <div className="mb-6">
+                  <div className="flex justify-between mb-2">
                     <label
-                      class="block mb-2 text-sm font-bold text-gray-700"
-                      for="username"
-                    >
-                      Correo
-                    </label>
-                    <input
-                      class="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                      onChange={(e) => handleChange(e)}
-                      type="text"
-                      id="exampleFormControlInput1"
-                      name="email"
-                      placeholder="Correo"
-                    />
-                  </div>
-                  <div class="mb-4">
-                    <label
-                      class="block mb-2 text-sm font-bold text-gray-700"
-                      for="password"
+                      htmlFor="password"
+                      className="text-sm text-gray-600 dark:text-gray-400"
                     >
                       Contraseña
                     </label>
-                    <input
-                      class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border border-red-500 rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                      onChange={(e) => handleChange(e)}
-                      type="password"
-                      id="exampleFormControlInput2"
-                      name="password"
-                      placeholder="*********"
-                    />
-                  </div>
-                  <div class="mb-4">
-                    <input
-                      class="mr-2 leading-tight"
-                      type="checkbox"
-                      id="checkbox_id"
-                    />
-                    <label class="text-sm" for="checkbox_id">
-                      Remember Me
-                    </label>
-                  </div>
-                  <div class="mb-6 text-center">
-                    <p className="text-red-800">{ctx.error}</p>
-                    <button
-                      class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
-                      type="button"
-                      onClick={() => ctx.obtenerToken(state)}
+
+                    <Link
+                      href="/"
+                      className="text-sm text-gray-400 focus:outline-none focus:text-indigo-500 hover:text-indigo-500 dark:hover:text-indigo-300"
                     >
-                      Iniciar Sesion
-                    </button>
+                      Se te olvido la contraseña?
+                    </Link>
                   </div>
-                  <hr class="mb-6 border-t" />
-                  <div class="text-center">
-                    <a
-                      class="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
-                      href="./register.html"
-                    >
-                      Create an Account!
-                    </a>
-                  </div>
-                  <div class="text-center">
-                    <a
-                      class="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
-                      href="./forgot-password.html"
-                    >
-                      Forgot Password?
-                    </a>
-                  </div>
-                </form>
-              </div>
+
+                  <input
+                    onChange={onChange}
+                    value={password}
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="***********"
+                    className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
+                  />
+                </div>
+
+                <div className="mb-6">
+                  <button
+                    type="submit"
+                    className="w-full px-3 py-4 text-white bg-indigo-500 rounded-md focus:bg-indigo-600 focus:outline-none"
+                  >
+                    Iniciar Sesión
+                  </button>
+                </div>
+                <p className="text-sm text-center text-gray-400">
+                  Todavia no tienes cuenta?{" "}
+                  <Link
+                    href="/signup"
+                    className="text-indigo-400 focus:outline-none focus:underline focus:text-indigo-500 dark:focus:border-indigo-800"
+                  >
+                    Obtener Cuenta
+                  </Link>
+                </p>
+              </form>
             </div>
           </div>
         </div>
-      </body>
-      ;
-    </>
+      </div>
+    </div>
   );
 }

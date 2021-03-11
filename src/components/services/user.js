@@ -48,6 +48,18 @@ const getExamAndIdTest = async (id) => {
   return servicePost;
 };
 
+const sendEmail = async (id, email) => {
+  const servicePost = await userInfo.post(`/send-email/${id}`, {
+    testerEmail: email,
+  });
+  return servicePost;
+};
+
+const getUserInfo = async (id) => {
+  const servicePost = await userInfo.get(`/user-profile-info/${id}`);
+  return servicePost;
+};
+
 const INFO_USER = {
   getTest,
   createTest,
@@ -57,6 +69,8 @@ const INFO_USER = {
   getDetailGrades,
   getExamAndIdTest,
   editIDToTest,
+  sendEmail,
+  getUserInfo,
 };
 
 export default INFO_USER;

@@ -1,19 +1,23 @@
-import React from "react";
+import React, { Component, useContext, useEffect, useState } from "react";
 import { Route, Redirect } from "react-router-dom";
-import  TokenState  from "../../context/auth/AuthContext";
+import AuthContext from "./../../context/auth/AuthContext";
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
-  <TokenState.Consumer>
+export default function RutaPrivada({ component: Component, ...props }) {
+  const authCtx = useContext(AuthContext);
+  const { userToken, autenticado, usuarioAutenticado, usuario } = authCtx;
 
-    {({ token }) => (
+  useEffect(() => {
+    usuarioAutenticado();
+  }, []);
+
+  return (
+    <>
       <Route
-        {...rest}
+        {...props}
         render={(props) =>
-          token ? <Component {...props} /> : <Redirect to="/login" />
+          !autenticado ? <Redirect to="/" /> : <Component {...props} />
         }
       />
-    )}
-  </TokenState.Consumer>
-);
-
-export default PrivateRoute;
+    </>
+  );
+}

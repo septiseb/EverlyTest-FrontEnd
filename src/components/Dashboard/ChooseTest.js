@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
-import {useHistory, useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 import INFO_USER from "../services/user";
+import NavBarUser from "./NavBarUser";
+import SendEmail from "./SendEmail";
 
 export default function ChooseTest() {
   const [tests, setTests] = useState([]);
@@ -13,7 +15,7 @@ export default function ChooseTest() {
     e.preventDefault();
     try {
       await INFO_USER.addIDToTest(idGroupTest, addTest);
-      history.push(`/user-profile`)
+      history.push(`/user-profile`);
     } catch (error) {
       console.log(error);
     }
@@ -44,48 +46,10 @@ export default function ChooseTest() {
 
   return (
     <div>
-      <nav style={{ backgroundColor: "#4f46E6" }} className="bg-gray-800">
-        <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-          <div className="relative flex items-center justify-between h-16">
-            <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-              <button
-                className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-                aria-expanded="false"
-              >
-                <span className="sr-only">Open main menu</span>
-              </button>
-            </div>
-            <div className="flex-1 flex items-center justify-between sm:items-stretch sm:justify-between">
-              <div className="flex justify-between">
-                <div>
-                  <p className="text-white block py-2 text-base text-lg">
-                    <a href="/user-profile">Regresar</a>
-                  </p>
-                </div>
-                <div className="flex justify-between">
-                  <div className="flex items-center text-white ml-500">
-                    <form action="/logout" method="POST">
-                      <button type="submit">Cerrar Sesion</button>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"></div>
-          </div>
-        </div>
+<NavBarUser />
+<SendEmail id={idGroupTest} />
 
-        <div className="hidden sm:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1">
-            <a
-              href="/"
-              className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-            >
-              Inicio
-            </a>
-          </div>
-        </div>
-      </nav>
+
       <div style={{ paddingBottom: "20px" }} className="flex items-center my-2">
         <div className="m-3">
           <button
@@ -113,38 +77,6 @@ export default function ChooseTest() {
         </div>
       </div>
 
-      <form
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-        }}
-        method="POST"
-        action="/user-profile/create-test/{{this.groupTest._id}}"
-      >
-        <div
-          style={{ display: "flex", justifyContent: "center" }}
-          className="mb-3"
-        >
-          <input
-            style={{ textAlign: "center", width: "50%" }}
-            type="email"
-            className="form-control"
-            id="exampleInputEmail1"
-            name="testerEmail"
-            placeholder="Agregar correo del aplicante"
-            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}"
-          />
-          <button
-            style={{ width: "20%", marginLeft: "10px" }}
-            type="submit"
-            className="btn btn-primary"
-          >
-            Agregar
-          </button>
-        </div>
-      </form>
-
       <section className="py-1">
         <div className="flex container mx-auto">
           <div
@@ -166,7 +98,7 @@ export default function ChooseTest() {
                   <div className="bg-white hover:shadow-xl border-red-900">
                     <div className="">
                       <img
-                        src="../{{this.url}}"
+                        src={test.url}
                         alt=""
                         className="h-56 w-full border-white border-8 hover:opacity-25"
                       />

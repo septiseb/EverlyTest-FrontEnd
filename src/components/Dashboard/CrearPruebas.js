@@ -1,12 +1,12 @@
 import React, { useContext, useState } from "react";
-import { Redirect, useHistory } from "react-router";
+import { useHistory } from "react-router";
 import INFO_USER from "../../components/services/user";
 import AuthContext from "../../context/auth/AuthContext";
 
 export default function CrearPruebas() {
   const ctx = useContext(AuthContext);
   const history = useHistory();
-  const [state, setState] = useState({ user: ctx.token });
+  const [state, setState] = useState({ user: ctx.userToken });
 
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.value });
@@ -17,7 +17,7 @@ export default function CrearPruebas() {
     try {
       console.log(state);
       const createTest = await INFO_USER.createTest(state);
-      history.push(`/user-profile/${ctx.token}/create-test/${createTest.data}`);
+      history.push(`/user-profile/create-test/${createTest.data}`);
     } catch (e) {
       console.log(e.response);
     }

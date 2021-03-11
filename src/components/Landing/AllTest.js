@@ -70,9 +70,10 @@ export default function AllTest() {
             style={{ justifyContent: "space-evenly" }}
             className="flex flex-wrap px-6"
           >
-            {tests.map((test) => {
+            {tests.map((test, id) => {
               return (
                 <div
+                  key={id}
                   style={{
                     width: "400px",
                     display: "flex",
@@ -84,7 +85,7 @@ export default function AllTest() {
                   <div className="bg-white hover:shadow-xl border-red-900">
                     <div className="">
                       <img
-                        src="../{{this.url}}"
+                        src={test.url}
                         alt=""
                         className="h-56 w-full border-white border-8 hover:opacity-25"
                       />

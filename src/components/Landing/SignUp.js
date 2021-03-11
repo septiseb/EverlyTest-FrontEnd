@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import NavBarHome from "./NavBarHome";
 import AUTH_SERVICE from "../services/auth";
+import { Redirect, useHistory } from "react-router";
 
 const positionArray = [
   "Analista de Reclutamiento",
@@ -26,7 +27,8 @@ const sectorArray = [
   "Otros",
 ];
 
-export default function SignUp({ getUser }) {
+export default function SignUp() {
+  const history = useHistory();
   const [state, setState] = useState({
     position: "Analista de Reclutamiento",
     sector: "Educación",
@@ -36,14 +38,16 @@ export default function SignUp({ getUser }) {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
-      const signUpAx = await AUTH_SERVICE.signup(state);
-      getUser(signUpAx);
-      setState({});
+      const res = await AUTH_SERVICE.signup(state);
+      setState({
+        position: "Analista de Reclutamiento",
+        sector: "Educación",
+      }); 
+      history.push("/login");
     } catch (e) {
       setError(e.response.data);
     }
   };
-
   console.log(state);
 
   const handleChange = (event) => {
@@ -144,8 +148,8 @@ export default function SignUp({ getUser }) {
                     className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
                     onChange={(e) => handleChange(e)}
                   >
-                    {sectorArray.map((sec) => (
-                      <option>{sec}</option>
+                    {sectorArray.map((sec, id) => (
+                      <option key={id}>{sec}</option>
                     ))}
                   </select>
                 </div>
@@ -157,12 +161,12 @@ export default function SignUp({ getUser }) {
                 <div className="my-2 bg-white p-1 flex border border-gray-200 rounded">
                   {" "}
                   <select
-                    name="sector"
+                    name="position"
                     className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
                     onChange={(e) => handleChange(e)}
                   >
-                    {positionArray.map((pos) => (
-                      <option>{pos}</option>
+                    {positionArray.map((pos, id) => (
+                      <option key={id}>{pos}</option>
                     ))}
                   </select>
                 </div>
