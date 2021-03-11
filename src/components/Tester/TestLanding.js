@@ -7,6 +7,7 @@ export default function TestLanding() {
   const [testerInfo, setTesterInfo] = useState({
     code: { user: { company: "", namePosition: "", _id: "" } },
   });
+  const [error, setError] = useState("");
 
   const { idTester } = useParams();
 
@@ -16,13 +17,11 @@ export default function TestLanding() {
         const tester = await TESTER_INFO.getTesterInfo(idTester);
         setTesterInfo(tester.data);
       } catch (e) {
-        console.log(e);
+        setError(e);
       }
     };
     getTester();
   }, [idTester]);
-
-  console.log(testerInfo);
 
   return (
     <>

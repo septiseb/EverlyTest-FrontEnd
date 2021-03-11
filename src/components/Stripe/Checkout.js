@@ -1,25 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router";
 import axios from "axios";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
 export default function Checkout(props) {
+  const [error, setError] = useState();
   const stripe = useStripe();
   const { idUser } = useParams();
 
   const createCheckoutSession = async (priceId) => {
     try {
       const axiosCall = await axios.post(
-        `http://localhost:3001/payment/create-checkout-session/${idUser}`,
+        process.env.REACT_APP_BACKEND_UR +
+          `/payment/create-checkout-session/${idUser}`,
         {
           priceId: priceId,
         }
       );
-      const connectStripe = await stripe.redirectToCheckout({
+      await stripe.redirectToCheckout({
         sessionId: axiosCall.data.sessionId,
       });
     } catch (e) {
-      console.log(e);
+      setError(e);
     }
   };
 

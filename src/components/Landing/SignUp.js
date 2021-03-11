@@ -48,7 +48,6 @@ export default function SignUp() {
       setError(e.response.data);
     }
   };
-  console.log(state);
 
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.value });

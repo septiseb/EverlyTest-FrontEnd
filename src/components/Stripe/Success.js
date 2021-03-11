@@ -7,24 +7,26 @@ export default function Success() {
   const urlParams = new URLSearchParams(window.location.search);
   const sessionId = urlParams.get("session_id");
   const ctx = useContext(AuthContext);
-  
+
   let customerId;
 
   useEffect(() => {
     const check = async () => {
       if (sessionId) {
         const axiosGet = await axios.get(
-          "http://localhost:3001/payment/checkout-session?sessionId=" +
+          process.env.REACT_APP_BACKEND_UR +
+            "/payment/checkout-session?sessionId=" +
             sessionId
         );
         customerId = axiosGet.data.customer;
 
         const axiosPost = await axios.put(
-          `http://localhost:3001/payment/checkout-session/${ctx.userToken}`,{
-            cusStripe: customerId
+          process.env.REACT_APP_BACKEND_UR +
+            `/payment/checkout-session/${ctx.userToken}`,
+          {
+            cusStripe: customerId,
           }
-        )
-       
+        );
       }
     };
 

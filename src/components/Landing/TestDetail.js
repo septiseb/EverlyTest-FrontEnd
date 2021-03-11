@@ -11,7 +11,6 @@ export default function TestDetail() {
     const getTest = async () => {
       const test = await axios.get(`http://localhost:3001/tests/${idTest}`);
       setTest(test.data);
-      console.log(test.data);
     };
     getTest();
   }, []);

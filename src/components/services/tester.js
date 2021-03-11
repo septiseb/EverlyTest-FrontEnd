@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const testerInfo = axios.create({
-  baseURL: "http://localhost:3001/tester",
+  baseURL: process.env.REACT_APP_BACKEND_UR + "/tester",
   withCredentials: true,
 });
 

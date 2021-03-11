@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const serviceAuth = axios.create({
-  baseURL: "http://localhost:3001/api",
+  baseURL: process.env.REACT_APP_BACKEND_UR + "/api",
   withCredentials: true,
 });
 
@@ -11,8 +11,7 @@ const signup = async (obj) => {
 };
 
 const login = async (obj) => {
-  const response = await serviceAuth
-    .post("/login", obj);
+  const response = await serviceAuth.post("/login", obj);
   return response;
 };
 

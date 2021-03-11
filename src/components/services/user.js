@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const userInfo = axios.create({
-  baseURL: "http://localhost:3001/user",
+  baseURL: process.env.REACT_APP_BACKEND_UR + "/user",
   withCredentials: true,
 });
 

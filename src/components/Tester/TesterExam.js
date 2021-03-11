@@ -6,6 +6,7 @@ export default function TesterExam() {
   const [exam, setExam] = useState({ questions: [] });
   const [answers, setAnswers] = useState({});
   const [answerTest, setanswerTest] = useState(false);
+  const [error, setError] = useState("");
 
   const { idTester, idTest } = useParams();
 
@@ -23,7 +24,7 @@ export default function TesterExam() {
         const exam = await TESTER_INFO.getExamForTester(idTester, idTest);
         setExam(exam.data);
       } catch (e) {
-        console.log(e);
+        setError(e);
       }
     };
     getExam();
@@ -32,18 +33,13 @@ export default function TesterExam() {
   const submitExam = async (event) => {
     event.preventDefault();
     try {
-      await TESTER_INFO.postExamForTester(
-        answers,
-        idTester,
-        idTest
-      );
+      await TESTER_INFO.postExamForTester(answers, idTester, idTest);
       setanswerTest(true);
     } catch (e) {
-      console.log(e.response.data);
+      setError(e.response.data);
     }
   };
 
-  console.log(exam);
   return (
     <>
       {!answerTest ? (
