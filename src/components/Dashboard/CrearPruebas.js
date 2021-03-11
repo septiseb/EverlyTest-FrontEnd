@@ -6,7 +6,7 @@ import AuthContext from "../../context/auth/AuthContext";
 export default function CrearPruebas() {
   const ctx = useContext(AuthContext);
   const history = useHistory();
-  const [state, setState] = useState({ user: ctx.userToken });
+  const [state, setState] = useState({ user: ctx.userToken || ctx.usuario });
 
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.value });
@@ -18,6 +18,7 @@ export default function CrearPruebas() {
       console.log(state);
       const createTest = await INFO_USER.createTest(state);
       history.push(`/user-profile/create-test/${createTest.data}`);
+      return;
     } catch (e) {
       console.log(e.response);
     }

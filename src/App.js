@@ -43,24 +43,23 @@ function App() {
               <Route exact path="/tests" component={AllTest} />
               <Route exact path="/tests/:idTest" component={TestDetail} />
               <Route exact path="/login-tester" component={TestLog} />
-       {/*        <PrivateRoute exact path="/user-profile" component={HomeDash} /> */}
-              <Route exact path="/user-profile" component={HomeDash} />
-              <Route
+              <PrivateRoute exact path="/user-profile" component={HomeDash} />
+              <PrivateRoute
                 exact
                 path="/user-profile/create-test"
                 component={CrearPruebas}
               />
-              <Route
+              <PrivateRoute
                 exact
                 path="/user-profile/create-test/:idGroupTest"
                 component={ChooseTest}
               />
-              <Route
+              <PrivateRoute
                 exact
                 path="/user-profile/details/:idGroupTest"
                 component={DetailTesters}
               />
-              <Route
+              <PrivateRoute
                 exact
                 path="/user-profile/edit-test/:idGroupTest"
                 component={EditTest}
@@ -72,7 +71,7 @@ function App() {
                 component={TesterExam}
               />
               <Elements stripe={stripePromise}>
-                <Route exact path="/checkout/:idUser" render={(props) => <Checkout {...props}/>} />
+                <PrivateRoute exact path="/checkout/:idUser" render={(props) => <Checkout {...props}/>} />
                 <Route exact path="/success.html" component={Success} />
                 <Route exact path="/error.html" component={Success} />
               </Elements>

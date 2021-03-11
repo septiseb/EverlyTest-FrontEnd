@@ -35,73 +35,85 @@ export default function TestLog() {
   return (
     <>
       <NavBarHome />
-      <div className="flex items-center my-10 bg-white dark:bg-gray-900">
-        <div className="container mx-auto">
-          <div className="max-w-md mx-auto my-10">
-            <div className="text-center">
-              <h1 className="my-3 text-3xl font-semibold text-gray-700 dark:text-gray-200">
-                Aplicante
-              </h1>
-
-              <p className="text-gray-500 dark:text-gray-400">
-                Bienvenido Aplicante listo para tu prueba!
-              </p>
+      <div className="flex items-center min-h-screen p-4 bg-gray-100 lg:justify-center">
+        <div className="flex flex-col overflow-hidden bg-white rounded-md shadow-lg max md:flex-row md:flex-1 lg:max-w-screen-md">
+          <div className="p-4 py-6 text-white bg-blue-500 md:w-80 md:flex-shrink-0 md:flex md:flex-col md:items-center md:justify-evenly">
+            <div className="my-3 text-4xl font-bold tracking-wider text-center">
+              <a href="/">Bienvenido</a>
             </div>
-
-            <div className="m-7">
-              <form onSubmit={(e) => submitCheck(e)}>
-                <div className="mb-6">
+            <p className="mt-6 font-normal text-center text-gray-300 md:mt-0">
+              EverlyTest, te da la bienvenida en donde podras acceder a la
+              prueba que la empresa hizo para ti. Para entrar introducir el
+              correo compartido de la compañia y su código de acceso.
+            </p>
+            <p className="mt-6 text-sm text-center text-gray-300">
+              Read our{" "}
+              <a href="/" className="underline">
+                terms
+              </a>{" "}
+              and{" "}
+              <a href="/" className="underline">
+                conditions
+              </a>
+            </p>
+          </div>
+          <div className="p-5 bg-white md:flex-1">
+            <h3 className="my-4 text-2xl font-semibold text-gray-700">
+              Aplicante
+            </h3>
+            <form
+              onSubmit={(e) => submitCheck(e)}
+              className="flex flex-col space-y-5"
+            >
+              <div className="flex flex-col space-y-1">
+                <label
+                  for="email"
+                  className="text-sm font-semibold text-gray-500"
+                >
+                  Correo
+                </label>
+                <input
+                  onChange={(e) => handleChange(e)}
+                  value={state.email}
+                  type="text"
+                  id="exampleFormControlInput1"
+                  name="email"
+                  placeholder="Correo"
+                  autofocus
+                  className="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"
+                />
+              </div>
+              <div className="flex flex-col space-y-1">
+                <div className="flex items-center justify-between">
                   <label
-                    htmlFor="email"
-                    className="block mb-2 text-sm text-gray-600 dark:text-gray-400"
+                    for="password"
+                    className="text-sm font-semibold text-gray-500"
                   >
-                    Correo
+                    Código
                   </label>
-
-                  <input
-                    onChange={(e) => handleChange(e)}
-                    value={state.email}
-                    type="text"
-                    className="form-control"
-                    id="exampleFormControlInput1"
-                    name="email"
-                    placeholder="Correo"
-                    className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
-                  />
                 </div>
-
-                <div className="mb-6">
-                  <div className="flex justify-between mb-2">
-                    <label
-                      htmlFor="password"
-                      className="text-sm text-gray-600 dark:text-gray-400"
-                    >
-                      Código
-                    </label>
-                  </div>
-
-                  <input
-                    onChange={(e) => handleChange(e)}
-                    value={state.code}
-                    type="text"
-                    id="exampleFormControlInput2"
-                    name="code"
-                    placeholder="*********"
-                    className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
-                  />
+                <input
+                  onChange={(e) => handleChange(e)}
+                  value={state.code}
+                  type="text"
+                  id="exampleFormControlInput2"
+                  name="code"
+                  placeholder="*********"
+                  className="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"
+                />
+              </div>
+              <div>
+                <button
+                  type="submit"
+                  className="w-full px-4 py-2 text-lg font-semibold text-white transition-colors duration-300 bg-blue-500 rounded-md shadow hover:bg-blue-600 focus:outline-none focus:ring-blue-200 focus:ring-4"
+                >
+                  Iniciar Prueba
+                </button>
+                <div className="text-sm text-red-600 hover:underline focus:text-blue-800">
+                  {error}
                 </div>
-                <div className="text-red-400 ">{error}</div>
-
-                <div className="mb-6">
-                  <button
-                    type="submit"
-                    className="w-full px-3 py-4 text-white bg-indigo-500 rounded-md focus:bg-indigo-600 focus:outline-none"
-                  >
-                    Iniciar Sesión
-                  </button>
-                </div>
-              </form>
-            </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>

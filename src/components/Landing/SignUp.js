@@ -61,10 +61,7 @@ export default function SignUp() {
         <div className="flex flex-col md:flex-row justify-center">
           <div className="md:w-1/2 max-w-md flex flex-col justify-center">
             <div className="md:text-4xl text-xl font-black uppercase">
-              Awesome tool for your future team
-            </div>
-            <div className="text-xl mt-4">
-              Develop your workforce and make it a selling machine
+             Utiliza nuestra herramienta para filtrar los mejores candidatos para la posición.
             </div>
           </div>
           <div className="md:w-1/2 flex justify-start mt-5 md:justify-end w-full md:w-1/2 ">

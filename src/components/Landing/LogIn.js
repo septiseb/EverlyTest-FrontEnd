@@ -60,87 +60,112 @@ export default function Login(props) {
       {alerta ? (
         <div className={`alerta ${alerta.categoria}`}>{alerta.msg}</div>
       ) : null}
-
-      <div className="flex items-center my-10 bg-white dark:bg-gray-900">
-        <div className="container mx-auto">
-          <div className="max-w-md mx-auto my-10">
-            <div className="text-center">
-              <h1 className="my-3 text-3xl font-semibold text-gray-700 dark:text-gray-200">
-                Iniciar Sesion
-              </h1>
-
-              <p className="text-gray-500 dark:text-gray-400">
-                Bienvenido de Regreso!
-              </p>
+      <div class="flex items-center min-h-screen p-4 bg-gray-100 lg:justify-center">
+        <div class="flex flex-col overflow-hidden bg-white rounded-md shadow-lg max md:flex-row md:flex-1 lg:max-w-screen-md">
+          <div class="p-4 py-6 text-white bg-blue-500 md:w-80 md:flex-shrink-0 md:flex md:flex-col md:items-center md:justify-evenly">
+            <div class="my-3 text-4xl font-bold tracking-wider text-center">
+              <a href="/">EverlyTest</a>
             </div>
-
-            <div className="m-7">
-              <form onSubmit={onSubmit}>
-                <div className="mb-6">
+            <p class="mt-6 font-normal text-center text-gray-300 md:mt-0">
+              Bienvenido y gracias por confiar en nosotros. 
+            </p>
+            <p class="flex flex-col items-center justify-center mt-10 text-center">
+              <span>¿Todavía no tienes cuenta?</span>
+              <Link to="/signup" class="underline">
+                Registrate!
+              </Link>
+            </p>
+            <p class="mt-6 text-sm text-center text-gray-300">
+              Read our{" "}
+              <a href="/" class="underline">
+                terms
+              </a>{" "}
+              and{" "}
+              <a href="/" class="underline">
+                conditions
+              </a>
+            </p>
+          </div>
+          <div class="p-5 bg-white md:flex-1">
+            <h3 class="my-4 text-2xl font-semibold text-gray-700">
+              Iniciar Sesión
+            </h3>
+            <form onSubmit={onSubmit} class="flex flex-col space-y-5">
+              <div class="flex flex-col space-y-1">
+                <label for="email" class="text-sm font-semibold text-gray-500">
+                  Correo
+                </label>
+                <input
+                  onChange={onChange}
+                  value={email}
+                  type="email"
+                  name="email"
+                  placeholder="correo"
+                  autofocus
+                  class="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"
+                />
+              </div>
+              <div class="flex flex-col space-y-1">
+                <div class="flex items-center justify-between">
                   <label
-                    htmlFor="email"
-                    className="block mb-2 text-sm text-gray-600 dark:text-gray-400"
+                    for="password"
+                    class="text-sm font-semibold text-gray-500"
                   >
-                    Correo
+                    Contraseña
                   </label>
-
-                  <input
-                    onChange={onChange}
-                    value={email}
-                    type="email"
-                    name="email"
-                    placeholder="correo"
-                    className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
-                  />
-                </div>
-
-                <div className="mb-6">
-                  <div className="flex justify-between mb-2">
-                    <label
-                      htmlFor="password"
-                      className="text-sm text-gray-600 dark:text-gray-400"
-                    >
-                      Contraseña
-                    </label>
-
-                    <Link
-                      href="/"
-                      className="text-sm text-gray-400 focus:outline-none focus:text-indigo-500 hover:text-indigo-500 dark:hover:text-indigo-300"
-                    >
-                      Se te olvido la contraseña?
-                    </Link>
-                  </div>
-
-                  <input
-                    onChange={onChange}
-                    value={password}
-                    type="password"
-                    name="password"
-                    id="password"
-                    placeholder="***********"
-                    className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
-                  />
-                </div>
-
-                <div className="mb-6">
-                  <button
-                    type="submit"
-                    className="w-full px-3 py-4 text-white bg-indigo-500 rounded-md focus:bg-indigo-600 focus:outline-none"
-                  >
-                    Iniciar Sesión
-                  </button>
-                </div>
-                <p className="text-sm text-center text-gray-400">
-                  Todavia no tienes cuenta?{" "}
                   <Link
-                    href="/signup"
-                    className="text-indigo-400 focus:outline-none focus:underline focus:text-indigo-500 dark:focus:border-indigo-800"
+                    href="/"
+                    class="text-sm text-blue-600 hover:underline focus:text-blue-800"
                   >
-                    Obtener Cuenta
+                    Olvidó contraseña?
                   </Link>
-                </p>
-              </form>
-            </div>
+                </div>
+                <input
+                  onChange={onChange}
+                  value={password}
+                  type="password"
+                  name="password"
+                  id="password"
+                  placeholder="***********"
+                  class="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"
+                />
+              </div>
+              <div>
+                <button
+                  type="submit"
+                  class="w-full px-4 py-2 text-lg font-semibold text-white transition-colors duration-300 bg-blue-500 rounded-md shadow hover:bg-blue-600 focus:outline-none focus:ring-blue-200 focus:ring-4"
+                >
+                  Iniciar Sesión
+                </button>
+              </div>
+              <div class="flex flex-col space-y-5">
+                <span class="flex items-center justify-center space-x-2">
+                  <span class="h-px bg-gray-400 w-14"></span>
+                  <span class="font-normal text-gray-500">o iniciar con</span>
+                  <span class="h-px bg-gray-400 w-14"></span>
+                </span>
+                <div class="flex flex-col space-y-4">
+                  <a
+                    href="/"
+                    class="flex items-center justify-center px-4 py-2 space-x-2 transition-colors duration-300 border border-blue-500 rounded-md group hover:bg-blue-500 focus:outline-none"
+                  >
+                    <span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                      </svg>
+                    </span>
+                    <span class="text-sm font-medium text-blue-500 group-hover:text-white">
+                      LinkedIn
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>

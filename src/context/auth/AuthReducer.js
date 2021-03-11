@@ -41,7 +41,7 @@ export default (state, action) => {
       return {
         ...state,
         autenticado: true,
-        usuario: action.payload
+        usuario: action.payload._id
       };
 
     default:

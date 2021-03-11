@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function NavBarHome() {
   return (
     <>
-      <nav style={{ backgroundColor: "#4f46E6" }} className="bg-gray-800">
+      <nav className="bg-blue-500" >
         <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
           <div className="relative flex items-center justify-between h-16">
             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -19,37 +19,31 @@ export default function NavBarHome() {
               <div className="hidden sm:block sm:ml-6">
                 <div className="flex space-x-4">
                   <Link
-                    to="/user-profile"
-                    className="text-white-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                  >
-                    Dashboard
-                  </Link>
-                  <Link
                     to="/"
-                    className="text-white-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                    className="text-white hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                   >
                     Inicio
                   </Link>
                   <Link
                     to="/tests"
-                    className="text-white-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                    className="text-white hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                   >
                     Pruebas
                   </Link>
                   <Link
                     to="/signup"
-                    className="text-white-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                    className="text-white hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                   >
                     Registrar
                   </Link>
                   <Link
-                    className="text-white-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                    className="text-white hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                     to="/login"
                   >
                     Iniciar Sesión
                   </Link>
                   <Link
-                    className="text-white-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                    className="text-white hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                     to="/login-tester"
                   >
                     Aplicante

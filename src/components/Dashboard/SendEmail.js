@@ -17,8 +17,10 @@ export default function SendEmail(props) {
     }
     try {
       setError("");
+      setEmail("");
       await INFO_USER.sendEmail(idtest, email);
     } catch (e) {
+      setEmail("");
       setError(e.response.data.message);
     }
   };
@@ -42,6 +44,7 @@ export default function SendEmail(props) {
           <input
             onChange={(e) => handleChange(e)}
             style={{ textAlign: "center", width: "50%" }}
+            value={email}
             type="email"
             className="form-control"
             id="exampleInputEmail1"
