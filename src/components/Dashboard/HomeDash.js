@@ -36,7 +36,7 @@ export default function HomeDash() {
       ) : (
         <>
           <NavBarUser id={ctx.userToken || ctx.usuario} />
-          <Notification days={trialLeft} id={ctx.userToken || ctx.usuario} I />
+          <Notification days={trialLeft} id={ctx.userToken || ctx.usuario} status={userInfo}I />
           <TestDash />
         </>
       )}

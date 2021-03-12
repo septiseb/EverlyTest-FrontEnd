@@ -61,7 +61,9 @@ export default function TestDash() {
           <>
             <div
               key={id}
-              className="bg-white rounded-lg shadow-sm hover:shadow-lg duration-500 px-2 sm:px-6 md:px-2 py-4 my-6"
+              className={`${
+                id % 2 === 0 ? "bg-gray-200" : "bg-white-900"
+              } rounded-lg shadow-sm hover:shadow-lg duration-500 px-2 sm:px-6 md:px-2 py-1 my-2`}
             >
               <div className="grid grid-cols-12 gap-3">
                 <div
@@ -88,12 +90,12 @@ export default function TestDash() {
                   </div>
 
                   <div className="inline-block font-medium text-white mx-1 text-sm lg:text-md">
-                    Contestados
+                    {/* Contestados */}
                   </div>
 
                   <div className="grid my-3">
                     <span className="inline-block font-bold text-xs">
-                      Promedio: {/* {{average this.testerEmail}} */}
+                      {/* Promedio: */} {/* {{average this.testerEmail}} */}
                     </span>
                   </div>
                 </div>
@@ -128,7 +130,7 @@ export default function TestDash() {
                     </div>
                   </div>
 
-                  <div className="mt-2">
+                  <div className="mt-2 text-bold">
                     <p
                       href="#"
                       className="sm:text-sm md:text-md lg:text-lg text-gray-700 font-bold"
@@ -160,23 +162,23 @@ export default function TestDash() {
                     </p>
                     <ul
                       style={{ alignItems: "baseline" }}
-                      className="flex flex-row display row list-disc space-y-2"
+                      className="flex flex-row display row list-disc"
                     >
                       {test.test.map((t, id) => {
                         return (
                           <>
-                            <li key={id} className="flex flex-row w-auto">
+                            <li key={id} className="flex flex-row w-auto mr-5">
                               <div className="flex">
                                 <span className="h-6 flex items-center sm:h-7">
                                   <svg
-                                    className="flex-shrink-0 h-4 w-4 text-cyan-500"
+                                    className="flex-shrink-0 h-4 w-4"
                                     viewBox="0 0 20 20"
                                     fill="currentColor"
                                   >
                                     <path
-                                      fill-rule="evenodd"
+                                      fillRule="evenodd"
                                       d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                      clip-rule="evenodd"
+                                      clipRule="evenodd"
                                     />
                                   </svg>
                                 </span>

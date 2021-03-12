@@ -8,7 +8,6 @@ export default function NavBarUser(props) {
 
   const eraseSession = (event) => {
     event.preventDefault();
-    console.log("HOLA");
     ctx.cerrarSesion();
     history.push("/login");
   };

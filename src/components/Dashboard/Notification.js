@@ -11,7 +11,9 @@ export default function Notification(props) {
 
   return (
     <>
-      {notifStatus ? (
+      {props.status.activo || !notifStatus ? (
+        ""
+      ) : (
         <div className="bg-yellow-300">
           <div className="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between flex-wrap">
@@ -77,8 +79,6 @@ export default function Notification(props) {
             </div>
           </div>
         </div>
-      ) : (
-        ""
       )}
     </>
   );

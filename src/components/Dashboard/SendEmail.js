@@ -34,8 +34,6 @@ export default function SendEmail(props) {
           flexDirection: "column",
           justifyContent: "center",
         }}
-        method="POST"
-        action="/user-profile/create-test/{{this.groupTest._id}}"
       >
         <div
           style={{ display: "flex", justifyContent: "center" }}
@@ -43,7 +41,7 @@ export default function SendEmail(props) {
         >
           <input
             onChange={(e) => handleChange(e)}
-            style={{ textAlign: "center", width: "50%" }}
+            style={{ textAlign: "center", width: "50%", border:"1px solid black" }}
             value={email}
             type="email"
             className="form-control"
@@ -55,12 +53,14 @@ export default function SendEmail(props) {
           <button
             style={{ width: "20%", marginLeft: "10px" }}
             type="submit"
-            className="btn btn-primary"
+            className="btn btn-primary text-white 
+                            bg-blue-400 hover:bg-blue-500 duration-300 
+                            text-xs font-bold  opacity-120 hover:opacity-100"
           >
             Agregar
           </button>
         </div>
-        <div>{error}</div>
+        <div className="text-center text-red-600 mr-72">{error}</div>
       </form>
     </div>
   );

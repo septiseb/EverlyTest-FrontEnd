@@ -7,6 +7,8 @@ import SendEmail from "./SendEmail";
 export default function ChooseTest() {
   const [tests, setTests] = useState([]);
   const [addTest, setAddTest] = useState([]);
+  const [error, setError] = useState("");
+
   const history = useHistory();
 
   const { idGroupTest } = useParams();
@@ -42,13 +44,9 @@ export default function ChooseTest() {
     setAddTest([...newArray]);
   };
 
-  console.log(addTest);
-
   return (
     <div>
-<NavBarUser />
-<SendEmail id={idGroupTest} />
-
+      <NavBarUser />
 
       <div style={{ paddingBottom: "20px" }} className="flex items-center my-2">
         <div className="m-3">
@@ -71,17 +69,22 @@ export default function ChooseTest() {
           </button>
         </div>
         <div className="flex justify-center items-center w-full">
-          <h1 style={{ marginRight: "350px", fontSize: "30px" }}>
-            <strong>INTRODUCIR NOMBRE DEL TEST</strong>
+          <h1
+            style={{ marginRight: "350px", fontSize: "30px" }}
+            className="text-5xl"
+          >
+            <strong>Escoge tus pruebas</strong>
           </h1>
         </div>
       </div>
+
+      <SendEmail id={idGroupTest} />
 
       <section className="py-1">
         <div className="flex container mx-auto">
           <div
             style={{ justifyContent: "space-evenly" }}
-            className="flex flex-wrap px-6"
+            className="flex flex-wrap px-6 my-1"
           >
             {tests.map((test, id) => {
               return (
@@ -95,7 +98,12 @@ export default function ChooseTest() {
                   key={id}
                   className="w-full lg:w-1/2  md:px-4 lg:px-6 py-3"
                 >
-                  <div className="bg-white hover:shadow-xl border-red-900">
+                  <div
+                    className="bg-white hover:shadow-xl border-red-900"
+                    style={{
+                      border: "2px solid #5DB7FE",
+                    }}
+                  >
                     <div className="">
                       <img
                         src={test.url}
@@ -117,14 +125,14 @@ export default function ChooseTest() {
                           <div className="text-sm font-medium">
                             {addTest.includes(test._id) ? (
                               <button
-                                className="bg-red-600"
+                                className="bg-red-600 px-4 py-1"
                                 onClick={() => borrarTest(test._id)}
                               >
                                 Borrar
                               </button>
                             ) : (
                               <button
-                                className="bg-green-600"
+                                className="bg-green-600 px-4 py-1"
                                 onClick={() => agregarTest(test._id)}
                               >
                                 Agregar

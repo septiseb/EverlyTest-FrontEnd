@@ -16,7 +16,7 @@ export default function EditTest() {
     const testsID = { test: [...testAdded.test.map((t) => t._id)] };
     try {
       await INFO_USER.editIDToTest(idGroupTest, testsID);
-      history.push(`/user-profile`);
+      await history.push(`/user-profile`);
     } catch (error) {
       console.log(error);
     }
@@ -81,7 +81,7 @@ export default function EditTest() {
         </div>
         <div className="flex justify-center items-center w-full">
           <h1 style={{ marginRight: "350px", fontSize: "30px" }}>
-            <strong>INTRODUCIR NOMBRE DEL TEST</strong>
+            <strong>EDITAR TEST</strong>
           </h1>
         </div>
       </div>
@@ -91,7 +91,7 @@ export default function EditTest() {
       <section className="py-1">
         <div className="flex container mx-auto">
           <div
-            style={{ justifyContent: "space-evenly" }}
+            style={{ justifyContent: "space-between" }}
             className="flex flex-wrap px-6"
           >
             {testAdded.test.map((test, id) => {
@@ -104,10 +104,14 @@ export default function EditTest() {
                     alignContent: "space-between",
                   }}
                   key={id}
-                  className="w-full lg:w-1/2  md:px-4 lg:px-6 py-3"
+                  className="w-full lg:w-1/2  md:px-4 lg:px-6 py-3 my-1"
                 >
-                  <div className="bg-white hover:shadow-xl border-red-900">
-                    <h1>Estos Test ya estan agregados</h1>
+                  <div
+                    className="bg-white hover:shadow-xl border-red-900"
+                    style={{
+                      border: "2px solid #5DB7FE",
+                    }}
+                  >
                     <div className="">
                       <img
                         src={test.url}
@@ -128,7 +132,7 @@ export default function EditTest() {
                         <div className="2/3">
                           <div className="text-sm font-medium">
                             <button
-                              className="bg-red-600"
+                              className="bg-red-600 px-4 py-1"
                               onClick={() => borrarTest(test._id)}
                             >
                               Quitar
@@ -141,16 +145,6 @@ export default function EditTest() {
                 </div>
               );
             })}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-1">
-        <div className="flex container mx-auto">
-          <div
-            style={{ justifyContent: "space-evenly" }}
-            className="flex flex-wrap px-6"
-          >
             {tests.map((test, id) => {
               return (
                 <div
@@ -161,10 +155,14 @@ export default function EditTest() {
                     alignContent: "space-between",
                   }}
                   key={id}
-                  className="w-full lg:w-1/2  md:px-4 lg:px-6 py-3"
+                  className="w-full lg:w-1/2  md:px-4 lg:px-6 py-3 my-1"
                 >
-                  <div className="bg-white hover:shadow-xl border-red-900">
-                    <h1>Estos Test no estan agregados</h1>
+                  <div
+                    className="bg-white hover:shadow-xl border-red-900"
+                    style={{
+                      border: "2px solid #5DB7FE",
+                    }}
+                  >
                     <div className="">
                       <img
                         src={test.url}
@@ -185,7 +183,7 @@ export default function EditTest() {
                         <div className="2/3">
                           <div className="text-sm font-medium">
                             <button
-                              className="bg-green-600"
+                              className="bg-green-600 px-4 py-1"
                               onClick={() => agregarTest(test._id)}
                             >
                               Agregar

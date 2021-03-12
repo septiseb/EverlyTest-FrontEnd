@@ -25,8 +25,8 @@ export default function Checkout(props) {
   };
 
   return (
-    <div>
-      <div className="min-h-screen flex justify-center items-center">
+    <div className="bg-gray-200 min-h-screen">
+      <div className=" flex justify-center items-center">
         <div className="">
           <div className="text-black font-semibold text-2xl">
             <h1>{props.message}</h1>

@@ -27,26 +27,28 @@ export default function AllTest() {
             <h1 className="fw-light" style={{ fontSize: "50px" }}>
               EverlyTest
             </h1>
-            <p className="lead text-muted">
-              Evaluación previa para filtrar candidatos
-            </p>
           </div>
         </div>
+
         <form
           style={{
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
           }}
-          method="POST"
-          action="/tests"
+          className="my-2"
         >
           <div
             style={{ display: "flex", justifyContent: "center" }}
             className="mb-3"
           >
             <input
-              style={{ textAlign: "center", width: "50%" }}
+              style={{
+                textAlign: "center",
+                width: "50%",
+                border: "1px solid black",
+                borderRadiu: "2%",
+              }}
               type="text"
               className="form-control"
               id="exampleInputEmail1"
@@ -54,9 +56,9 @@ export default function AllTest() {
               placeholder="Buscar la posicion que quieres cubrir, herramientas o pruebas para tus candidatos"
             />
             <button
-              style={{ width: "20%", marginLeft: "10px" }}
+              style={{ width: "7%", marginLeft: "10px", fontWeight: "bolder" }}
               type="submit"
-              className="btn btn-primary"
+              className="btn btn-primary bg-blue-400 ring-indigo-300 h-7"
             >
               Buscar
             </button>
@@ -80,10 +82,15 @@ export default function AllTest() {
                     justifyContent: "space-around",
                     alignContent: "space-between",
                   }}
-                  className="w-full lg:w-1/2  md:px-4 lg:px-6 py-3"
+                  className="w-full lg:w-1/2  md:px-4 lg:px-6 py-3 border-black-900 my-2"
                 >
-                  <div className="bg-white hover:shadow-xl border-red-900">
-                    <div className="">
+                  <div
+                    className="bg-white hover:shadow-xl border-red-900"
+                    style={{
+                      border: "2px solid #5DB7FE",
+                    }}
+                  >
+                    <div>
                       <img
                         src={test.url}
                         alt=""
