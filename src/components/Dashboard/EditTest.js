@@ -15,9 +15,8 @@ export default function EditTest() {
     e.preventDefault();
     const testsID = { test: [...testAdded.test.map((t) => t._id)] };
     try {
-      history.push(`/user-profile`);
-      history.go(0);
       await INFO_USER.editIDToTest(idGroupTest, testsID);
+      history.push(`/user-profile`);
     } catch (error) {
       console.log(error);
     }

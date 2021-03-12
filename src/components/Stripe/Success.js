@@ -14,14 +14,14 @@ export default function Success() {
     const check = async () => {
       if (sessionId) {
         const axiosGet = await axios.get(
-          process.env.REACT_APP_BACKEND_UR +
+          process.env.REACT_APP_BACKEND_URL +
             "/payment/checkout-session?sessionId=" +
             sessionId
         );
         customerId = axiosGet.data.customer;
 
         const axiosPost = await axios.put(
-          process.env.REACT_APP_BACKEND_UR +
+          process.env.REACT_APP_BACKEND_URL +
             `/payment/checkout-session/${ctx.userToken}`,
           {
             cusStripe: customerId,

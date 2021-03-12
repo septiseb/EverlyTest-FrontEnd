@@ -11,8 +11,7 @@ export default function Checkout(props) {
   const createCheckoutSession = async (priceId) => {
     try {
       const axiosCall = await axios.post(
-        process.env.REACT_APP_BACKEND_UR +
-          `/payment/create-checkout-session/${idUser}`,
+      `https://everlytst.herokuapp.com/payment/create-checkout-session/${idUser}`,
         {
           priceId: priceId,
         }

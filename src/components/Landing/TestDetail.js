@@ -9,7 +9,7 @@ export default function TestDetail() {
 
   useEffect(() => {
     const getTest = async () => {
-      const test = await axios.get(`http://localhost:3001/tests/${idTest}`);
+      const test = await axios.get(process.env.FRONTEND+`/tests/${idTest}`);
       setTest(test.data);
     };
     getTest();

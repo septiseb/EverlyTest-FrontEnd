@@ -7,7 +7,7 @@ import Notification from "./Notification";
 import TestDash from "./TestDash";
 
 export default function HomeDash() {
-  const [userInfo, setUserInfo] = useState({activo: true});
+  const [userInfo, setUserInfo] = useState({ activo: true });
   const [trialLeft, setTrialLeft] = useState();
   const ctx = useContext(AuthContext);
 
@@ -26,11 +26,9 @@ export default function HomeDash() {
     getTest();
   }, [ctx.userToken, ctx.usuario]);
 
-console.log(userInfo,trialLeft);
-
   return (
     <>
-      {trialLeft<=0 && !userInfo.activo ? (
+      {trialLeft <= 0 && !userInfo.activo ? (
         <Redirect
           to={`/checkout/${ctx.userToken || ctx.usuario}`}
           message={"HOLA AQUI ESTOY"}

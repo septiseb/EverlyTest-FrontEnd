@@ -71,7 +71,7 @@ function App() {
                 component={TesterExam}
               />
               <Elements stripe={stripePromise}>
-                <PrivateRoute exact path="/checkout/:idUser" render={(props) => <Checkout {...props}/>} />
+                <Route exact path="/checkout/:idUser" render={(props) => <Checkout {...props}/>} />
                 <Route exact path="/success.html" component={Success} />
                 <Route exact path="/error.html" component={Success} />
               </Elements>

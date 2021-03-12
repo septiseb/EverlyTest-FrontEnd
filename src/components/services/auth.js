@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const serviceAuth = axios.create({
-  baseURL: process.env.REACT_APP_BACKEND_UR + "/api",
+  baseURL: process.env.REACT_APP_BACKEND_URL + "/api",
   withCredentials: true,
 });
 
