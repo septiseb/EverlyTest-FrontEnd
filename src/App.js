@@ -44,7 +44,7 @@ function App() {
               <Route exact path="/tests/:idTest" component={TestDetail} />
               <Route exact path="/login-tester" component={TestLog} />
               <PrivateRoute exact path="/user-profile" component={HomeDash} />
-              <PrivateRoute
+              <Route
                 exact
                 path="/user-profile/create-test"
                 component={CrearPruebas}
