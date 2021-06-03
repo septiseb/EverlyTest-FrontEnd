@@ -108,19 +108,6 @@ export default function AllTest() {
                           {test.duration} minutos
                         </div>
                         <div className="2/3">
-                          <div className="text-sm font-medium">
-                            <Link
-                              style={{ backgroundColor: "#0d6efd" }}
-                              to={`/tests/${test._id}`}
-                              className="flex text-white 
-                            bg-blue-400 hover:bg-blue-500 duration-300 
-                            text-xs font-bold 
-                            mr-1 md:mr-2 mb-2 px-2 md:px-4 py-1 
-                            opacity-90 hover:opacity-100"
-                            >
-                              Detalle
-                            </Link>
-                          </div>
                         </div>
                       </div>
                     </div>
