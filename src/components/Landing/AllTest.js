@@ -107,8 +107,6 @@ export default function AllTest() {
                           {test.duration} minutos
                         </div>
                         <div className="2/3">
-                          <div className="text-sm font-medium">
-                          </div>
                         </div>
                       </div>
                     </div>
