@@ -4,6 +4,9 @@ import INFO_USER from "../services/user";
 
 export default function AllTest() {
   const [tests, setTests] = useState([]);
+  const [search,setSearch] = useState("");
+
+  
 
   useEffect(() => {
     const getTests = async () => {
@@ -12,6 +15,13 @@ export default function AllTest() {
     };
     getTests();
   }, []);
+
+
+
+  const searchTest = ({target:{value}}) =>{
+    setSearch(value)
+  }
+  console.log(search)
 
   return (
     <>
@@ -52,6 +62,7 @@ export default function AllTest() {
               className="form-control"
               id="exampleInputEmail1"
               name="position"
+              onChange={searchTest}
               placeholder="Buscar la posicion que quieres cubrir, herramientas o pruebas para tus candidatos"
             />
             <button
@@ -71,7 +82,7 @@ export default function AllTest() {
             style={{ justifyContent: "space-evenly" }}
             className="flex flex-wrap px-6"
           >
-            {tests.map((test, id) => {
+            {tests.filter(t=>t.name.toLowerCase().includes(search)).map((test, id) => {
               return (
                 <div
                   key={id}
